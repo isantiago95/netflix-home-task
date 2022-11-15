@@ -3,7 +3,6 @@ import { renderButton, renderHTML } from '../helpers/index.js';
 export function renderHeader(video, item) {
   const header = document.getElementById('main-header');
   const { logo, synopsis } = video;
-  //   console.log({ video, header, item });
   header.style.backgroundImage = `url(${video.background})`;
 
   const template = `

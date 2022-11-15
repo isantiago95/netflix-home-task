@@ -1,7 +1,7 @@
 import { renderButton } from '../helpers/index.js';
 
 export default function singleItem({ video, isInline, billboard }) {
-  if (isInline && !billboard) return;
+  if (isInline && !billboard) return; // this avoid to render the billboard if is the same as header
 
   const { boxart, id } = video;
   const renderBillboard = isInline && billboard;
@@ -12,7 +12,7 @@ export default function singleItem({ video, isInline, billboard }) {
   singleVideo.id = `video-${id}`;
 
   if (renderBillboard) {
-    console.log({ video, isInline, billboard });
+    // will render a different html structure for billboard
     singleVideo.style.backgroundImage = `url(${video.backgroundShort})`;
     singleVideo.innerHTML = `
       <div class="billboard-metadata hidden">

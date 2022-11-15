@@ -2,20 +2,21 @@ import { gallery } from '../app.js';
 import { appendElement } from '../helpers/index.js';
 import singleItem from './single-item.js';
 
-export default async function renderRow(items, billboards, idx) {
-  const isInline = items.length === 1;
-  const moreThan5 = items.length > 5;
+export default async function renderRow({ items, billboards, idx, onFinish = () => {} }) {
+  const isInline = items.length === 1; // whether is an inline billboard or not
+  const moreThan5 = items.length > 5; // needed to render or not buttons on each side
 
   const row = createRow({ idx, isInline, items, billboards });
 
   const wrapper = wrap({ row, isInline, idx, moreThan5 });
-  console.log(wrapper);
 
   appendElement(wrapper, gallery);
+  onFinish(idx); //call this at the end of render
 }
 
 function wrap({ row, isInline, idx, moreThan5 }) {
-  // console.log({ row, isInline, idx });
+  // function to wrap row inside a parent and properly add buttons for scroll
+
   const wrapper = document.createElement('div');
   wrapper.id = `wrapper-${idx}`;
   wrapper.className = 'wrapper';
@@ -38,6 +39,7 @@ function wrap({ row, isInline, idx, moreThan5 }) {
 }
 
 function createRow({ idx, isInline, items, billboards }) {
+  //function to create the row of videos
   const rowTemplate = document.createElement('div');
   rowTemplate.id = `row-${idx}`;
   rowTemplate.className = isInline ? 'row-billboard-inline' : 'row-videos';
@@ -54,6 +56,8 @@ function createRow({ idx, isInline, items, billboards }) {
 }
 
 const buildProps = ({ video, billboards, isInline, idx }) => {
+  // properly send props to each single item
+  // if billboard exists and its type is "inline", add it to props
   let props = {
     video,
     isInline,
