@@ -1,0 +1,222 @@
+:root {
+  --movie-width: 15.5vw;
+  --movie-height: 200px;
+  --arrow-width: 52px;
+  --slider-py: 200px;
+}
+/**
+ * Global styles
+ */
+html,
+body {
+  background: #141414;
+  color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/**
+ * The gallery container.
+ *
+ * It wraps all the rows and boxshots.
+ */
+.gallery {
+  width: 1280px;
+  margin: 0 auto;
+}
+
+/**
+ * Video Row Container.
+ *
+ * We stack each row on top of each other in the gallery. Inside we place the image boxshots.
+ */
+.wrapper {
+  display: flex;
+  align-items: center;
+}
+.row-videos {
+  margin: 20px 0;
+  position: relative;
+  width: 100%;
+  overflow-x: scroll;
+  display: grid;
+  grid-template-columns: max-content;
+}
+.row-videos::-webkit-scrollbar,
+.row-billboard-inline::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-content {
+  position: relative;
+  overflow: auto;
+  transition: width 0.4s;
+  height: 100%;
+}
+
+.boxshot {
+  height: 100%;
+  background-color: black;
+  position: absolute;
+  z-index: 1;
+  transition: left 0.4s cubic-bezier(0.47, 0.13, 0.15, 0.89);
+}
+
+/**
+ * Video boxshot.
+ *
+ * The actual image for a video
+ */
+.boxshot {
+  display: inline-block;
+  font-size: 0.8rem;
+  height: 142px;
+  margin-right: 3px;
+  max-width: 250px;
+  padding: 0 2px;
+  position: relative;
+  transition: all 0.8s ease-in-out;
+  width: 250px;
+}
+
+.boxshot:last-child {
+  margin-right: 0;
+}
+
+.boxshot img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+}
+
+/**
+ * Billboard Row Container.
+ *
+ * Container for the billboard image and metadata block.
+ */
+.row-billboard {
+  position: relative;
+}
+
+/**
+ * Billboard Background Image.
+ *
+ * The actual image element for the billboard.
+ */
+.billboard-background {
+  width: 1280px;
+  height: 720px;
+}
+
+/**
+ * Billboard Metadata Container.
+ *
+ * Contains the logo, synopsis and action buttons.
+ */
+.billboard-metadata {
+  position: absolute;
+  top: 80px;
+  left: 80px;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition: opacity 1s, transform 1s;
+}
+
+/**
+ * Billboard Metadata Container Visibility.
+ *
+ * When we have an inline billboard, we don't display the metadata container until
+ * it's in the viewport. This CSS class takes care of keeping it hidden.
+ *
+ * Removing it will set opacity to 1 with a transition.
+ */
+.billboard-metadata.hidden {
+  opacity: 0;
+  transform: translate3d(10px, 0, 0);
+}
+
+/**
+ * Logo element
+ */
+.billboard-metadata-logo {
+  display: block;
+}
+
+/**
+ * Synopsis Text
+ */
+.billboard-metadata-synopsis {
+  max-width: 500px;
+  font-size: 20px;
+  margin: 20px 0;
+}
+
+/**
+ * Metadata Buttons
+ */
+.billboard-metadata-button {
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 20px 15px 0 0;
+  padding: 10px 25px;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
+  text-decoration: none;
+}
+
+/**
+ * Special Red Play Metadata Button
+ */
+.billboard-metadata-button-play {
+  background-color: #ff0a16;
+  border-color: #ff0a16;
+}
+
+/**
+ * Custom inline billboard
+ */
+.row-billboard-inline .billboard-background {
+  height: 192px;
+  display: flex;
+  justify-content: end;
+}
+
+.row-billboard-inline .billboard-metadata {
+  padding: 0 2em;
+  position: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.row-billboard-inline .carousel-content {
+  overflow: hidden;
+}
+
+.btn-nav {
+  width: var(--arrow-width);
+  height: 150px;
+  border-radius: 5px;
+  position: relative;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  outline: none;
+  border: none;
+  color: white;
+  top: 0;
+  z-index: 5;
+}
+
+.btn-left {
+  margin-right: -4%;
+}
+.btn-right {
+  margin-left: -4%;
+}
+.transparent {
+  background-color: transparent;
+  color: transparent;
+}
